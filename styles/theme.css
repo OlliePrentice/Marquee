@@ -1,0 +1,74 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    @apply text-gray-700;
+    @apply font-body;
+}
+
+input::placeholder {
+    @apply text-gray-600;
+}
+
+a, button {
+    outline: 0!important;
+
+    @apply transition;
+
+    span {
+        transition: none;
+    }
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    @apply tracking-widest text-xxs py-3 px-5 bg-green-400 rounded text-white font-medium transition hover:bg-green-500;
+
+
+    &--large {
+        @apply text-xs py-4 px-8;
+    }
+
+    &.btn--form {
+        @apply rounded-lg;
+        @apply rounded-l-none;
+    }
+}
+
+.burger, .burger:before, .burger:after {
+    display: block;
+    position: relative;
+    width: 1rem;
+    height: 2px;
+    font-size: 0;
+    line-height: 1;
+
+    @apply bg-gray-50;
+
+}
+
+.burger {
+    &:before, &:after {
+        content: '';
+    }
+
+    &:before {
+        top: -5px;
+    }
+
+    &:after {
+        bottom: -3px;
+    }
+}
+
+.swiper-container.overflow-visible {
+    overflow: visible!important;
+}
+
+.swiper-slide.h-auto {
+    height: auto!important;
+}
