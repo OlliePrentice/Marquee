@@ -4,7 +4,7 @@ import Footer from "../components/footer";
 import Layout from "../components/layout";
 import Hero from "../components/hero";
 import Categories from "../components/categories";
-import Carousel from "../components/Carousel";
+import Carousel from "../components/carousel";
 import Cta from "../components/cta";
 
 export default function Home() {
