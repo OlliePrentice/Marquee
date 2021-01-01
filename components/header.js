@@ -20,7 +20,7 @@ export default function Header() {
                     <div className="flex-1 px-2 text-right">
                         <nav className="main-header__nav text-zero">
                             <ul>
-                                <li>
+                                <li className="relative">
                                     <a href="/" className="active-page">Home</a>
                                 </li>
                                 <li>
