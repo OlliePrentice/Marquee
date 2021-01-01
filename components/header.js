@@ -1,20 +1,9 @@
 import {signIn, signOut, useSession} from 'next-auth/client'
-import Lottie from "react-lottie";
-import * as userLottie from '../public/icons/user.json'
-
+import Lottie from "lottie-react";
+import * as userAnimation from '../public/icons/user.json'
 
 export default function Header() {
-    const [session, loading] = useSession()
-
-    const userLottieOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: userLottie.default,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
-        },
-        resizeMode: 'cover'
-    };
+    const [session, loading] = useSession();
 
     return (
         <header className="main-header bg-white fixed w-full top-0 left-0 z-50">
@@ -43,20 +32,20 @@ export default function Header() {
                                 </li>
                                 <li>
                                     {!session && <>
-
                                         <button onClick={signIn} className="profile-menu flex items-center p-2 bg-gray-700 rounded-3xl shadow-sm hover:shadow-md">
-                                            <span className="burger mx-2"></span>
+                                            <span className="burger mx-2"/>
                                             <span className="block p-1 bg-white rounded-full mx-1">
-                                            <Lottie options={userLottieOptions}
-                                                    height={25}
-                                                    width={25}
-                                                    isClickToPauseDisabled={true}
-                                            />
+                                            <Lottie animationData={userAnimation.default} style={{width: 24, height: 24}}/>
                                             </span>
                                         </button>
                                     </>}
                                     {session && <>
-                                        <button className="btn" onClick={signOut}>Sign out</button>
+                                        <button onClick={signOut} className="profile-menu flex items-center p-2 bg-gray-700 rounded-3xl shadow-sm hover:shadow-md">
+                                            <span className="burger mx-2"/>
+                                            <span className="block bg-white p-0.5 rounded-full mx-1">
+                                                <img src={session.user.image} alt="User Image" className="w-7 h-7 rounded-full"/>
+                                            </span>
+                                        </button>
                                     </>}
                                 </li>
                             </ul>

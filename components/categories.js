@@ -67,7 +67,7 @@ export default function Categories() {
             <ul className="flex flex-wrap -mx-4 list-none p-0">
                 {items.map((item, i) => {
                     return (
-                        <CardCategory item={item}/>
+                        <CardCategory key={i} item={item}/>
                     );
                 })}
 

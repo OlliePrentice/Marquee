@@ -26,11 +26,11 @@ export default function CardCategory(props) {
 
                                                 if (i === 2 || i === props.item.subcategories.length - 1) {
                                                     return (
-                                                        <span>{category}</span>
+                                                        <span key={i}>{category}</span>
                                                     );
                                                 } else {
                                                     return (
-                                                        <span>{category}, </span>
+                                                        <span key={i}>{category}, </span>
                                                     );
                                                 }
                                             })}

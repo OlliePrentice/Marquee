@@ -20,11 +20,11 @@ export default function CardFeatured(props) {
 
                                                 if (i === 2 || i === props.item.categories.length - 1) {
                                                     return (
-                                                        <span>{category}</span>
+                                                        <span key={i}>{category}</span>
                                                     );
                                                 } else {
                                                     return (
-                                                        <span>{category}, </span>
+                                                        <span key={i}>{category}, </span>
                                                     );
                                                 }
                                             })}
