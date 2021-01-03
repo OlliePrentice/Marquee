@@ -1,6 +1,7 @@
 import Head from "next/head";
 import {providers, signIn} from 'next-auth/client';
 import {useRouter} from 'next/router';
+import Image from 'next/image';
 import Layout from "../../components/layout";
 import ContainerFullWidth from "../../components/container-full-width";
 import ErrorMessage from "../../components/error-message";
@@ -69,16 +70,19 @@ export default function SignIn({providers, siteUrl}) {
                                     <div className="mt-3">
                                         {Object.values(providers).map(provider => (
                                             <div key={provider.name} className="mb-3">
-                                                <button
+                                                <a href={`#` + provider.id}
                                                     onClick={() => signIn(provider.id, {callbackUrl: callbackUrl})}
-                                                    className="block w-full btn btn--large bg-white hover:shadow-lg"><span
-                                                    className="inline-block align-middle mr-2">
-                                                <img
+                                                    className="block w-full btn btn--large bg-white hover:shadow-lg">
+                                                <div className="align-middle inline-block -ml-2 mr-3 font-zero leading-none">
+                                                <Image
                                                     src={`/icons/icon-${provider.name}.svg`}
-                                                    alt={`${provider.name} logo`}
-                                                    className="w-4"/></span>&nbsp;
+                                                    width={16}
+                                                    height={16}
+                                                    className="inline-block align-middle mr-2"
+                                                    />
+                                                </div>&nbsp;
                                                     <span className="align-middle">Sign in with {provider.name}</span>
-                                                </button>
+                                                </a>
                                             </div>
                                         ))}
                                     </div>
