@@ -75,7 +75,7 @@ export default function SignIn({providers, siteUrl}) {
                                                     className="block w-full btn btn--large bg-white hover:shadow-lg">
                                                 <div className="align-middle inline-block -ml-2 mr-3 font-zero leading-none">
                                                 <Image
-                                                    src={`/icons/icon-${provider.name}.svg`}
+                                                    src={`/icons/icon-${provider.id}.svg`}
                                                     width={16}
                                                     height={16}
                                                     className="inline-block align-middle mr-2"
