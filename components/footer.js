@@ -1,7 +1,7 @@
 import {signIn, signOut, useSession} from 'next-auth/client'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
-export default function Header() {
+export default function Footer() {
     const [session, loading] = useSession()
 
 

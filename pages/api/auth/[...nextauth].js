@@ -8,11 +8,18 @@ const options = {
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
+        Providers.Facebook({
+            clientId: process.env.FACEBOOK_APP_ID,
+            clientSecret: process.env.FACEBOOK_APP_SECRET,
+        }),
         // ...add more providers here
     ],
-
     // A database is optional, but required to persist accounts in a database
-    database: 'mongodb+srv://prenticedev94:LgKrvutTBKTmZ7B2@cluster0.jiqul.mongodb.net/marquee?retryWrites=true',
+    database: process.env.DATABASE_URL,
+    pages: {
+        signIn: '/auth/signin',
+        error: '/auth/signin'
+    }
 };
 
 export default (req, res) => NextAuth(req, res, options)

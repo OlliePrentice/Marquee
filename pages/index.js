@@ -9,8 +9,7 @@ import Cta from "../components/cta";
 
 export default function Home() {
     return (
-        <div>
-
+        <>
             <Head>
                 <title>Create Next App</title>
                 <link rel="icon" href="/icons/favicon.ico"/>
@@ -26,6 +25,6 @@ export default function Home() {
                      linkTitle="Sign up!"/>
             </Layout>
             <Footer/>
-        </div>
+        </>
     )
 }
