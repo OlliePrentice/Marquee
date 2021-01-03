@@ -6,17 +6,14 @@ const options = {
     providers: [
         Providers.Google({
             clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET
-        }),
-        Providers.GitHub({
-            clientId: process.env.GITHUB_ID,
-            clientSecret: process.env.GITHUB_SECRET
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
         }),
         // ...add more providers here
     ],
 
     // A database is optional, but required to persist accounts in a database
-    database: process.env.DATABASE_URL,
+    database: 'postgres://postgres:IVE1b5kO0U7dYsTWS1um@marqueeio-instance-1.cfnfnwpgpr1o.us-east-2.rds.amazonaws.com/postgres',
 };
 
 export default (req, res) => NextAuth(req, res, options)
