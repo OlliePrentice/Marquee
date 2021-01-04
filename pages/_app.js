@@ -1,5 +1,6 @@
 import '../styles/App.css'
 import 'swiper/swiper-bundle.min.css'
+import "reflect-metadata";
 import { Provider } from 'next-auth/client'
 import { config, library } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css';
