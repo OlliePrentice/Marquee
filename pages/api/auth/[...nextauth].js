@@ -15,7 +15,14 @@ const options = {
         // ...add more providers here
     ],
     // A database is optional, but required to persist accounts in a database
-    database: process.env.DATABASE_URL,
+    database: {
+        type: "mongodb",
+        uri: process.env.DATABASE_URL,
+        w: "majority",
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        retryWrites: true,
+    },
     pages: {
         signIn: '/auth/signin',
         error: '/auth/signin'
