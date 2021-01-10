@@ -1,6 +1,7 @@
 import {signIn, signOut, useSession} from 'next-auth/client'
 import Lottie from "lottie-react";
 import * as userAnimation from '../public/icons/user.json'
+import Link from "next/link";
 
 export default function Header() {
     const [session, loading] = useSession();
@@ -28,22 +29,31 @@ export default function Header() {
                                 </li>
 
                                 <li>
-                                    <a href="/">Add your space</a>
+                                    {!session && <Link href={`/auth/signin?callbackUrl=${process.env.NEXT_PUBLIC_SITE_URL}/add-space`}>
+                                        <a>Add your space</a>
+                                    </Link>}
+                                    {session && <Link href="/add-space">
+                                        <a>Add your space</a>
+                                    </Link>}
                                 </li>
                                 <li>
                                     {!session && <>
-                                        <button onClick={signIn} className="profile-menu flex items-center p-2 bg-gray-700 rounded-3xl shadow-sm hover:shadow-md">
+                                        <button onClick={signIn}
+                                                className="profile-menu flex items-center p-2 bg-gray-700 rounded-3xl shadow-sm hover:shadow-md">
                                             <span className="burger mx-2"/>
                                             <span className="block p-1 bg-white rounded-full mx-1">
-                                            <Lottie animationData={userAnimation.default} style={{width: 24, height: 24}}/>
+                                            <Lottie animationData={userAnimation.default}
+                                                    style={{width: 24, height: 24}}/>
                                             </span>
                                         </button>
                                     </>}
                                     {session && <>
-                                        <button onClick={signOut} className="profile-menu flex items-center p-2 bg-gray-700 rounded-3xl shadow-sm hover:shadow-md">
+                                        <button onClick={signOut}
+                                                className="profile-menu flex items-center p-2 bg-gray-700 rounded-3xl shadow-sm hover:shadow-md">
                                             <span className="burger mx-2"/>
                                             <span className="block bg-white p-0.5 rounded-full mx-1">
-                                                <img src={session.user.image} alt="User Image" className="w-7 h-7 rounded-full"/>
+                                                <img src={session.user.image} alt="User Image"
+                                                     className="w-7 h-7 rounded-full"/>
                                             </span>
                                         </button>
                                     </>}

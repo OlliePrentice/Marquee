@@ -10,7 +10,7 @@ import Footer from "../../components/footer";
 export default function SignIn({providers, siteUrl}) {
     const router = useRouter();
 
-    let callbackUrl = router.query.callbackUrl ? router.query.callbackUrl : siteUrl;
+    let callbackUrl = router.query.callbackUrl ? router.query.callbackUrl : process.env.NEXT_PUBLIC_SITE_URL;
 
     let errorMessage;
     if (router.query.error) {
@@ -101,6 +101,6 @@ export default function SignIn({providers, siteUrl}) {
 SignIn.getInitialProps = async (context) => {
     return {
         providers: await providers(context),
-        siteUrl: process.env.NEXTAUTH_URL
     }
 }
+

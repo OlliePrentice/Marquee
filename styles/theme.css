@@ -75,3 +75,15 @@ a, button {
 .swiper-slide.h-auto {
     height: auto!important;
 }
+
+.pac-container {
+    @apply rounded-lg shadow-xl p-5;
+
+    .pac-item {
+        @apply py-1;
+
+        &:first-child {
+            @apply border-transparent;
+        }
+    }
+}
