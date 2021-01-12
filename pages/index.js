@@ -8,6 +8,7 @@ import Carousel from "../components/carousel";
 import Cta from "../components/cta";
 
 export default function Home() {
+
     return (
         <>
             <Head>
@@ -28,3 +29,4 @@ export default function Home() {
         </>
     )
 }
+

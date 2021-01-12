@@ -1,3 +1,72 @@
 input {
     @apply transition duration-300 font-light text-lg duration-100 ease-in-out text-gray-600 py-4 p-6 block w-full appearance-none leading-normal border border-transparent rounded-lg focus:outline-none text-left select-none truncate focus:border-gray-100 bg-white shadow-lg focus:shadow-xl;
 }
+
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    left: -999999px;
+    cursor: pointer;
+    height: auto;
+    appearance: none;
+
+    + label {
+        display: block;
+        position: relative;
+        padding-left: 1.5rem;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: 3px;
+            left: 0;
+            margin: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: white;
+            box-sizing: border-box;
+            cursor: pointer;
+
+            @apply border border-gray-600;
+        }
+    }
+
+    &:checked {
+        + label {
+            &:after {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                left: 5px;
+                top: 8px;
+                margin: 0;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                vertical-align: middle;
+                background: black;
+            }
+
+        }
+    }
+}
+
+input[type="radio"] {
+    + label.radio-btn {
+        @apply border-2 border-gray-300 py-2 px-4 inline-block rounded;
+
+        &:before, &:after {
+            display: none!important;
+        }
+    }
+
+    &:checked {
+        + label.radio-btn {
+            @apply bg-green-50 border-green-500 text-green-800;
+        }
+    }
+}

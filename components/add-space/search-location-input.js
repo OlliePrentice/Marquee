@@ -19,6 +19,11 @@ const loadScript = (url, callback) => {
     }
 
     script.src = url;
+
+    var scripts = document.getElementsByTagName('script');
+    for (var i = scripts.length; i--;) {
+        if (scripts[i].src === url) return true;
+    }
     document.getElementsByTagName("head")[0].appendChild(script);
 };
 
@@ -71,7 +76,7 @@ function SearchLocationInput(props) {
                     placeholder="Enter an Address"
                     value={query.value ? query.value : ''}
                 />
-                <button type="button" onClick={() => props.handler(2)} className={`absolute right-0 top-1/2 transform -translate-y-1/2 h-full flex items-center px-5 text-gray-200 pointer-events-none ${query.valid && 'text-green-400 pointer-events-auto hover:text-black'}`}>
+                <button type="button" onClick={() => props.pageHandler(2)} className={`absolute right-0 top-1/2 transform -translate-y-1/2 h-full flex items-center px-5 text-gray-200 pointer-events-none ${query.valid && 'text-green-400 pointer-events-auto hover:text-black'}`}>
                     <FontAwesomeIcon size="lg" icon={['fas', 'arrow-alt-circle-right']}/></button>
             </div>
         </div>

@@ -1,22 +1,44 @@
-import react, { Component } from 'react';
+import {Component} from 'react';
 import Head from "next/head";
+import { withRouter } from 'next/router'
 import Layout from "../components/layout";
 import Footer from "../components/footer";
+import {getTopLevelCategories} from '../lib/mongodb';
 import ContainerFullWidth from "../components/container-full-width";
-import SearchLocationInput from "../components/addSpace/search-location-input";
-import addCategories from "../components/addSpace/add-categories";
+import SearchLocationInput from "../components/add-space/search-location-input";
+import AddCategories from "../components/add-space/add-categories";
 
-export default class AddSpace extends Component {
+class AddSpace extends Component {
     constructor(props) {
         super(props);
-        this.state = {page: 1};
-        this.handler = this.handler.bind(this);
+        this.state = {
+            page: (parseInt(props.router.query.step)) || 1,
+            loc: props.router
+        };
+        this.pageHandler = this.pageHandler.bind(this);
+
     }
 
-    handler(val) {
+
+    componentDidUpdate(prevProps) {
+
+        const { pathname, query } = this.props.router;
+        // verify props have changed to avoid an infinite loop
+        if (query.step !== prevProps.router.query.step) {
+            // fetch data based on the new query
+            this.setState({
+                page: (parseInt(query.step)) || 1
+            });
+
+        }
+    }
+
+    pageHandler(val) {
         this.setState({
-          page: val
-        })
+            page: val
+        });
+
+        this.props.router.push('/add-space?step=' + val, undefined);
     }
 
     render() {
@@ -34,8 +56,10 @@ export default class AddSpace extends Component {
                         </div>
                         <div className="max-w-3xl mx-auto pt-20 pb-80">
                             <form>
-                                {this.state.page === 1 && <SearchLocationInput handler={this.handler}/>}
-                                {this.state.page === 1 && <addCategories handler={this.handler}/>}
+                                {this.state.page === 1 && <SearchLocationInput pageHandler={this.pageHandler}/>}
+                                {this.state.page === 2 &&
+                                <AddCategories categories={this.props.categories}
+                                               pageHandler={this.pageHandler}/>}
                             </form>
                         </div>
                     </ContainerFullWidth>
@@ -45,3 +69,15 @@ export default class AddSpace extends Component {
         );
     }
 };
+
+export async function getServerSideProps(context) {
+    const categories = (await getTopLevelCategories()) ?? [];
+
+    return {
+        props: {
+            categories: categories,
+        },
+    }
+}
+
+export default withRouter(AddSpace);
