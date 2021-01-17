@@ -1,5 +1,13 @@
-input {
+input, textarea {
     @apply transition duration-300 font-light text-lg duration-100 ease-in-out text-gray-600 py-4 p-6 block w-full appearance-none leading-normal border border-transparent rounded-lg focus:outline-none text-left select-none truncate focus:border-gray-100 bg-white shadow-lg focus:shadow-xl;
+}
+
+textarea {
+    @apply h-40;
+}
+
+input::placeholder, textarea::placeholder {
+    @apply text-gray-600;
 }
 
 input[type="radio"] {
@@ -69,4 +77,19 @@ input[type="radio"] {
             @apply bg-green-50 border-green-500 text-green-800;
         }
     }
+}
+
+.dropzone {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-width: 2px;
+    border-radius: 2px;
+    border-style: dashed;
+    outline: none;
+    transition: border .24s ease-in-out;
+
+    @apply border-gray-500;
 }

@@ -7,10 +7,6 @@ body {
     @apply font-body;
 }
 
-input::placeholder {
-    @apply text-gray-600;
-}
-
 a, button {
     outline: 0!important;
 
@@ -39,6 +35,10 @@ a, button {
     &.btn--form {
         @apply rounded-lg;
         @apply rounded-l-none;
+    }
+
+    &:disabled {
+        @apply opacity-50;
     }
 }
 

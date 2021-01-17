@@ -29,12 +29,8 @@ export default function Header() {
                                 </li>
 
                                 <li>
-                                    {!session && <Link href={`/auth/signin?callbackUrl=${process.env.NEXT_PUBLIC_SITE_URL}/add-space`}>
-                                        <a>Add your space</a>
-                                    </Link>}
-                                    {session && <Link href="/add-space">
-                                        <a>Add your space</a>
-                                    </Link>}
+                                    {!session && <a href={`/auth/signin?callbackUrl=${process.env.NEXT_PUBLIC_SITE_URL}/add-space`}>Add your space</a>}
+                                    {session && <a href="/add-space">Add your space</a>}
                                 </li>
                                 <li>
                                     {!session && <>

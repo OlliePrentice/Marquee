@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import { Component } from 'react';
 import axios from "axios";
 import FormButton from "../elements/form-button";
 
@@ -61,7 +61,7 @@ export default class AddCategories extends Component {
         return (
             <div>
 
-                <div className="relative mb-10">
+                <div className="relative mb-12">
                     <h3 className="text-2xl block mb-4">Select a category:</h3>
                     <ul className="-mx-2">
                         {this.props.categories.map((item, i) => {
@@ -78,7 +78,7 @@ export default class AddCategories extends Component {
                 </div>
 
                 <div
-                    className={`relative mb-10 ${!this.state.subCategoriesActive && 'pointer-events-none opacity-50'}`}>
+                    className={`relative mb-12 ${!this.state.subCategoriesActive && 'pointer-events-none opacity-50'}`}>
                     <h3 className="text-2xl block mb-4">Pick a subcategory:</h3>
                     <ul className="-mx-2">
                         {this.state.subCategories.map((item, i) => {
@@ -95,10 +95,9 @@ export default class AddCategories extends Component {
                     </ul>
                 </div>
 
-                <div className={`${!this.state.pageComplete && 'pointer-events-none opacity-50'}`}>
-                    <FormButton type="button" title="Next" pageNumber={3} pageHandler={this.props.pageHandler}/>
+                <div>
+                    <FormButton type="button" title="Next" disabled={!this.state.pageComplete && true} pageNumber={3} pageHandler={this.props.pageHandler}/>
                 </div>
-                {/*<button type="button" onClick={() => console.log('test')}>test</button>*/}
 
             </div>
         );

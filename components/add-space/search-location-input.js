@@ -41,7 +41,7 @@ async function handlePlaceSelect(updateQuery, updateValidity) {
     const addressObject = autoComplete.getPlace();
     const address = addressObject.formatted_address;
 
-    if(addressObject.address_components) {
+    if (addressObject.address_components) {
         updateQuery({
             value: address,
             valid: true
@@ -67,16 +67,18 @@ function SearchLocationInput(props) {
 
     return (
         <div className="search-location-input">
-            <label className="text-2xl block mb-4">Enter your spaces address:</label>
+            <label htmlFor="addressSearch" className="text-2xl block mb-4">Enter your spaces address:</label>
             <div className="relative">
                 <input
+                    id="addressSearch"
                     className="pr-16"
                     ref={autoCompleteRef}
                     onChange={event => setQuery({value: event.target.value, valid: false})}
                     placeholder="Enter an Address"
                     value={query.value ? query.value : ''}
                 />
-                <button type="button" onClick={() => props.pageHandler(2)} className={`absolute right-0 top-1/2 transform -translate-y-1/2 h-full flex items-center px-5 text-gray-200 pointer-events-none ${query.valid && 'text-green-400 pointer-events-auto hover:text-black'}`}>
+                <button type="button" onClick={() => props.pageHandler(2)}
+                        className={`absolute right-0 top-1/2 transform -translate-y-1/2 h-full flex items-center px-5 text-gray-200 pointer-events-none ${query.valid && 'text-green-400 pointer-events-auto hover:text-black'}`}>
                     <FontAwesomeIcon size="lg" icon={['fas', 'arrow-alt-circle-right']}/></button>
             </div>
         </div>
