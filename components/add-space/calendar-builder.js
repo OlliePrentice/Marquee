@@ -8,14 +8,16 @@ class CalendarBuilder extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {division: 'daily'};
+        this.state = {division: 'daily', min: 0, max: 0};
 
         this.handleDivisionChange = this.handleDivisionChange.bind(this);
     }
 
-    handleDivisionChange(division) {
+    handleDivisionChange(division, min, max) {
         this.setState({
-            division
+            division,
+            min,
+            max
         })
     }
 
@@ -29,7 +31,7 @@ class CalendarBuilder extends Component {
                     <CalendarDivision updateDivision={this.handleDivisionChange} />
                 </div>
                 <div className="mb-12">
-                    <CalendarDefaults division={this.state.division} />
+                    <CalendarDefaults division={this.state.division} min={this.state.min} max={this.state.max} />
                 </div>
                 <div>
                     <FormButton type="button" title="Next" pageNumber={5}

@@ -1,4 +1,4 @@
-input, textarea {
+input, textarea, select {
     @apply transition duration-300 font-light text-lg duration-100 ease-in-out text-gray-600 py-4 p-6 block w-full appearance-none leading-normal border border-transparent rounded-lg focus:outline-none text-left select-none truncate focus:border-gray-100 bg-white shadow-lg focus:shadow-xl;
 }
 

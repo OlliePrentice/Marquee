@@ -4,8 +4,8 @@ import getIntervalRange from "../../../utils/getIntervalRange";
 export default function CalendarDivision(props) {
 
     const [selectedDivision, setSelectedDivision] = useState('daily');
-    const [selectedMinInterval, setSelectedMinInterval] = useState(null);
-    const [selectedMaxInterval, setSelectedMaxInterval] = useState(null);
+    const [selectedMinInterval, setSelectedMinInterval] = useState({value: null, index: 0});
+    const [selectedMaxInterval, setSelectedMaxInterval] = useState({value: null, index: 0});
     const [minIntervals, setMinIntervals] = useState(getIntervalRange(86400, 2678400, 86400));
     const [maxIntervals, setMaxIntervals] = useState(getIntervalRange(86400, 2678400));
 
@@ -64,20 +64,24 @@ export default function CalendarDivision(props) {
 
     function handleDivision(e) {
         setSelectedDivision(e.target.value);
-        setSelectedMinInterval('');
-        setSelectedMaxInterval('');
+        setSelectedMinInterval({value: null, index: 0});
+        setSelectedMaxInterval({value: null, index: 0});
         updateIntervals(e.target.value);
 
-        props.updateDivision(e.target.value);
+        props.updateDivision(e.target.value, 0, 0);
     }
 
     function handleInterval(e) {
         if(e.target.dataset.interval === 'min') {
-            setSelectedMinInterval(e.target.value);
-            updateIntervals(selectedDivision, e.target.value, selectedMaxInterval);
+            setSelectedMinInterval({value: e.target.value, index: e.target.selectedIndex});
+            updateIntervals(selectedDivision, e.target.value, selectedMaxInterval.value);
+
+            props.updateDivision(e.target.value, e.target.selectedIndex, selectedMaxInterval.index);
         } else {
-            setSelectedMaxInterval(e.target.value);
-            updateIntervals(selectedDivision, selectedMinInterval, e.target.value);
+            setSelectedMaxInterval({value: e.target.value, index: e.target.selectedIndex});
+            updateIntervals(selectedDivision, selectedMinInterval.value, e.target.value);
+
+            props.updateDivision(e.target.value, selectedMinInterval.index, e.target.selectedIndex);
         }
     }
 
@@ -98,10 +102,10 @@ export default function CalendarDivision(props) {
             </div>
             <div className="flex flex-wrap -mx-4">
                 <div className="px-4">
-                    <label htmlFor="bookingMinimum" className="mb-2 block">What is the maximum time that can be
+                    <label htmlFor="bookingMaximum" className="mb-2 block">What is the maximum time that can be
                         booked?</label>
-                    <select name="booking_minimum" id="bookingMinimum" className="block"
-                            onChange={(e) => handleInterval(e)} data-interval="max" value={selectedMaxInterval || ''}>
+                    <select name="booking_maximum" id="bookingMaximum" className="block"
+                            onChange={(e) => handleInterval(e)} data-interval="max" value={selectedMaxInterval.value || ''}>
                         {
                             maxIntervals.map((interval, i) => (
                                 <option key={i} disabled={interval.disabled}
@@ -114,7 +118,7 @@ export default function CalendarDivision(props) {
                     <label htmlFor="bookingMinimum" className="mb-2 block">What is the minimum time that can be
                         booked?</label>
                     <select name="booking_minimum" id="bookingMinimum" className="block"
-                            onChange={(e) => handleInterval(e)} data-interval="min" value={selectedMinInterval || ''}>
+                            onChange={(e) => handleInterval(e)} data-interval="min" value={selectedMinInterval.value || ''}>
                         {
                             minIntervals.map((interval, i) => (
                                 <option key={i} disabled={interval.disabled}
