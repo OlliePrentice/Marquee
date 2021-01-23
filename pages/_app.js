@@ -9,6 +9,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 config.autoAddCss = false;
 library.add(fab, faArrowAltCircleRight);
 
+global.__localeId__ = 'en';
+
 export default function App ({ Component, pageProps }) {
   return (
       <Provider session={pageProps.session}>

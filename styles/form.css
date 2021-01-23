@@ -29,7 +29,7 @@ input[type="radio"] {
             content: "";
             display: inline-block;
             position: absolute;
-            top: 3px;
+            top: 4px;
             left: 0;
             margin: 0;
             width: 15px;
@@ -50,18 +50,75 @@ input[type="radio"] {
                 display: inline-block;
                 position: absolute;
                 left: 5px;
-                top: 8px;
+                top: 9px;
                 margin: 0;
                 width: 5px;
                 height: 5px;
                 border-radius: 50%;
                 vertical-align: middle;
-                background: black;
+
+                @apply bg-green-500;
             }
 
         }
     }
 }
+
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    left: -999999px;
+    cursor: pointer;
+    height: auto;
+    appearance: none;
+
+    + label {
+        display: block;
+        position: relative;
+        padding-left: 1.5rem;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: 4px;
+            left: 0;
+            margin: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: white;
+            box-sizing: border-box;
+            cursor: pointer;
+
+            @apply border border-gray-600 rounded-sm;
+        }
+    }
+
+    &:checked {
+        + label {
+            &:after {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                left: 3px;
+                top: 7px;
+                width: 9px;
+                height: 9px;
+                margin: 0;
+                border-radius: 50%;
+                vertical-align: middle;
+
+
+                @apply rounded-sm bg-transparent border-2 border-green-500;
+            }
+
+        }
+    }
+}
+
 
 input[type="radio"] {
     + label.radio-btn {
