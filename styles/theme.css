@@ -21,7 +21,7 @@ a, button {
     text-decoration: none;
     text-transform: uppercase;
 
-    @apply tracking-widest text-xxs py-3 px-5 bg-green-400 rounded text-white font-medium transition hover:bg-green-500;
+    @apply inline-block tracking-widest text-xxs py-3 px-5 bg-green-400 rounded text-center text-white font-medium transition hover:bg-green-500;
 
     &.bg-white {
         background: white;

@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   purge: {
     content: [
@@ -25,7 +27,22 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      margin: ['last'],
+      textColor: ['important'],
+      display: ['important']
+    },
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ addVariant }) {
+      addVariant('important', ({ container }) => {
+        container.walkRules(rule => {
+          rule.selector = `.\\!${rule.selector.slice(1)}`;
+          rule.walkDecls(decl => {
+            decl.important = true
+          })
+        })
+      })
+    })
+  ],
 };

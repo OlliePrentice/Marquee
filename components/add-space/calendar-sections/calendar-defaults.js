@@ -90,10 +90,21 @@ function CalendarDefaults({division, min, max}) {
         }
     }
 
-    function renderSelects(day) {
-        const timepicker = timepickers.find(obj => {
-            return obj.day === day.toLowerCase();
-        });
+    const removeSlot = (index, timepicker) => {
+        const selectList = [...timepickers];
+        for (let i in selectList) {
+            if (selectList[i].day === timepicker.day) {
+                selectList[i].starts.splice(index, 1);
+                selectList[i].ends.splice(index, 1);
+                selectList[i].count -= 1;
+
+                setTimepickers(selectList);
+            }
+        }
+
+    };
+
+    function renderSelects(timepicker) {
 
         if (timepicker) {
             return Array.from(Array(timepicker.count)).map((val, i) => {
@@ -105,32 +116,47 @@ function CalendarDefaults({division, min, max}) {
                 //(timepicker.ends[i].selected - j) > max + 1
 
                 return (
-                    <div key={i} className="flex flex-wrap -mx-3">
-                        <div className="flex-1 px-3">
-                            <label htmlFor={`defaultDayStart` + timepicker.day + i} className="block">Start</label>
+                    <div key={i} className="flex flex-wrap -mx-2 mb-6">
+                        <div className="flex-1 px-2">
+                            <label htmlFor={`defaultDayStart` + timepicker.day + i}
+                                   className={`block mb-2 ${i !== 0 && 'sr-only'}`}>Start</label>
                             <select value={timepicker.starts[i].selected}
                                     name={`default_day_start_` + timepicker.day + `[]`}
                                     id={`defaultDayStart` + timepicker.day + i}
-                                    onChange={(e) => setTimePicked(e, day, 'start', i)}>
+                                    onChange={(e) => setTimePicked(e, timepicker.day, 'start', i)}>
                                 {slots.map((val, j) => (
                                     <option key={j} value={j}
                                             disabled={j > timepicker.ends[i].selected - 1 || prevEnd && j < prevEnd + 1 || (timepicker.ends[i].selected - j) < min + 1}>{val.toLowerCase()}</option>
                                 ))}
                             </select>
                         </div>
-                        <div className="flex-1 px-3">
-                            <label htmlFor={`defaultDayEnd` + timepicker.day + i} className="block">End</label>
+                        <div className="flex-1 px-2">
+                            <label htmlFor={`defaultDayEnd` + timepicker.day + i}
+                                   className={`block mb-2 ${i !== 0 && 'sr-only'}`}>End</label>
                             <select value={timepicker.ends[i].selected}
                                     name={`default_day_end_` + timepicker.day + `[]`}
                                     id={`defaultDayEnd` + timepicker.day + i}
-                                    onChange={(e) => setTimePicked(e, day, 'end', i)}>
+                                    onChange={(e) => setTimePicked(e, timepicker.day, 'end', i)}>
                                 {slots.map((val, j) => (
                                     <option key={j} value={j}
                                             disabled={j < timepicker.starts[i].selected + (min + 1) || nextStart && j > nextStart - 1}>{val.toLowerCase()}</option>
                                 ))}
                             </select>
                         </div>
-
+                        <div className="px-2">
+                            <div className="relative w-5 h-full">
+                                {i !== 0 &&
+                                <span
+                                    className="block absolute top-1/2 left-0 transform -translate-y-1/2 w-5 h-5 bg-red-500 rounded-full z-5 text-white cursor-pointer hover:opacity-70"
+                                    onClick={() => removeSlot(i, timepicker)}><svg
+                                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"><path
+                                    strokeLinecap="round" strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>}
+                            </div>
+                        </div>
                     </div>
                 );
             })
@@ -149,29 +175,53 @@ function CalendarDefaults({division, min, max}) {
         <>
             {/*{console.log(timepickers)}*/}
             <h3 className="text-lg font-medium block mb-20">{division === 'daily' ? 'Set your default opening days' : 'Set your default opening hours'}...</h3>
-            {weekDays.map((day, i) =>
-                (
-                    <div key={i} className="mb-4">
-                        <div className="flex flex-wrap -mx-2">
-                            <div className="px-2">
-                                <input id={'default' + day} type="checkbox" name="default_day" className="choice-input"
-                                       checked={timepickers.find(obj => obj.day === day.toLowerCase())}
-                                       value={day.toLowerCase()} onChange={(e) => handleDayCheck(e)}/>
-                                <label htmlFor={'default' + day} className="text-4xl">{day}</label>
+            {weekDays.map((day, i) => {
+                    const timepicker = timepickers.find(obj => {
+                        return obj.day === day.toLowerCase();
+                    });
+
+                    let dayChecked = false;
+                    let slotButtonDisabled = false;
+
+                    if (timepicker) {
+                        if (timepicker.day === day.toLowerCase()) {
+                            dayChecked = true;
+                        }
+
+                        console.log(slots.length - timepicker.ends[timepicker.ends.length - 1].selected);
+                        console.log(min);
+
+                        if(slots.length - timepicker.ends[timepicker.ends.length - 1].selected < min + 3) {
+                            slotButtonDisabled = true;
+                        }
+                    }
+
+                    return (
+                        <div key={i} className="mb-4">
+                            <div className="flex flex-wrap -mx-4">
+                                <div className="px-4 w-1/3">
+                                    <input id={'default' + day} type="checkbox" name="default_day" className="choice-input"
+                                           checked={dayChecked}
+                                           value={day.toLowerCase()} onChange={(e) => handleDayCheck(e)}/>
+                                    <label htmlFor={'default' + day} className="!inline-block text-4xl">{day}</label>
+                                </div>
+                                {division !== 'daily' && dayChecked &&
+                                <>
+                                    <div className="flex flex-wrap px-4 flex-1 -mx-2 mb-10">
+                                        <div className="px-2 flex-1">
+                                            {renderSelects(timepicker)}
+                                        </div>
+                                        <div className="w-full px-2 mr-9">
+                                            <button type="button" disabled={slotButtonDisabled} className="btn block w-full cursor-pointer"
+                                                  onClick={() => incrementSlotCount(day)}>Add Time Slot</button>
+                                        </div>
+                                    </div>
+                                </>
+                                }
                             </div>
-                            {division !== 'daily' &&
-                            <>
-                                <div className="px-2 flex-1">
-                                    {renderSelects(day)}
-                                </div>
-                                <div className="flex-1">
-                                    <span onClick={() => incrementSlotCount(day)}>Add</span>
-                                </div>
-                            </>
-                            }
                         </div>
-                    </div>
-                )
+                    )
+                }
             )}
         </>
     );

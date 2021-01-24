@@ -39,6 +39,7 @@ class AddSpace extends Component {
             page: val
         });
 
+        window.scrollTo(0,0);
         this.props.router.push('/add-space?step=' + val, undefined);
     }
 

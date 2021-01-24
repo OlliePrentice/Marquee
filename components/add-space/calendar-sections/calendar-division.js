@@ -76,12 +76,12 @@ export default function CalendarDivision(props) {
             setSelectedMinInterval({value: e.target.value, index: e.target.selectedIndex});
             updateIntervals(selectedDivision, e.target.value, selectedMaxInterval.value);
 
-            props.updateDivision(e.target.value, e.target.selectedIndex, selectedMaxInterval.index);
+            props.updateDivision(selectedDivision, e.target.selectedIndex, selectedMaxInterval.index);
         } else {
             setSelectedMaxInterval({value: e.target.value, index: e.target.selectedIndex});
             updateIntervals(selectedDivision, selectedMinInterval.value, e.target.value);
 
-            props.updateDivision(e.target.value, selectedMinInterval.index, e.target.selectedIndex);
+            props.updateDivision(selectedDivision, selectedMinInterval.index, e.target.selectedIndex);
         }
     }
 
