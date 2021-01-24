@@ -6,8 +6,8 @@ export default function CalendarDivision(props) {
     const [selectedDivision, setSelectedDivision] = useState('daily');
     const [selectedMinInterval, setSelectedMinInterval] = useState({value: null, index: 0});
     const [selectedMaxInterval, setSelectedMaxInterval] = useState({value: null, index: 0});
-    const [minIntervals, setMinIntervals] = useState(getIntervalRange(86400, 2678400, 86400));
-    const [maxIntervals, setMaxIntervals] = useState(getIntervalRange(86400, 2678400));
+    const [minIntervals, setMinIntervals] = useState(getIntervalRange(86400, 2678400, 86400, 'min', 'daily'));
+    const [maxIntervals, setMaxIntervals] = useState(getIntervalRange(86400, 2678400, 86400, 'max', 'daily'));
 
     const divisions = [
         {
@@ -36,28 +36,28 @@ export default function CalendarDivision(props) {
 
         switch (division) {
             case 'daily':
-                setMinIntervals(getIntervalRange(86400, 2678400, maxValue || 86400, 'min'));
-                setMaxIntervals(getIntervalRange(86400, 2678400, minValue, 'max'));
+                setMinIntervals(getIntervalRange(86400, 2678400, maxValue || 86400, 'min', division));
+                setMaxIntervals(getIntervalRange(86400, 2678400, minValue, 'max', division));
                 break;
             case 'hourly':
-                setMinIntervals(getIntervalRange(3600, 86400, maxValue || 3600, 'min'));
-                setMaxIntervals(getIntervalRange(3600, 86400, minValue, 'max'));
+                setMinIntervals(getIntervalRange(3600, 86400, maxValue || 3600, 'min', division));
+                setMaxIntervals(getIntervalRange(3600, 86400, minValue, 'max', division));
                 break;
             case '30-min':
-                setMinIntervals(getIntervalRange(1800, 86400, maxValue || 1800, 'min'));
-                setMaxIntervals(getIntervalRange(1800, 86400, minValue, 'max'));
+                setMinIntervals(getIntervalRange(1800, 86400, maxValue || 1800, 'min', division));
+                setMaxIntervals(getIntervalRange(1800, 86400, minValue, 'max', division));
                 break;
             case '15-min':
-                setMinIntervals(getIntervalRange(900, 86400, maxValue || 900, 'min'));
-                setMaxIntervals(getIntervalRange(900, 86400, minValue, 'max'));
+                setMinIntervals(getIntervalRange(900, 86400, maxValue || 900, 'min', division));
+                setMaxIntervals(getIntervalRange(900, 86400, minValue, 'max', division));
                 break;
             case '10-min':
-                setMinIntervals(getIntervalRange(600, 86400, maxValue || 600, 'min'));
-                setMaxIntervals(getIntervalRange(600, 86400, minValue, 'max'));
+                setMinIntervals(getIntervalRange(600, 86400, maxValue || 600, 'min', division));
+                setMaxIntervals(getIntervalRange(600, 86400, minValue, 'max', division));
                 break;
             default:
-                setMinIntervals(getIntervalRange(86400, 2678400, maxValue || 86400, 'min'));
-                setMaxIntervals(getIntervalRange(86400, 2678400, minValue, 'max'));
+                setMinIntervals(getIntervalRange(86400, 2678400, maxValue || 86400, 'min', division));
+                setMaxIntervals(getIntervalRange(86400, 2678400, minValue, 'max', division));
                 break;
         }
     }
@@ -88,9 +88,9 @@ export default function CalendarDivision(props) {
 
     return (
         <>
-            <div className="mb-8">
-                <h3 className="text-2xl block mb-8">Now for a few basic settings...</h3>
-                <label htmlFor="bookingDivision" className="mb-2 block">How frequently can slots be booked?</label>
+            <div className="mb-12">
+                <h3 className="text-lg font-medium block mb-20">Now for a few basic settings...</h3>
+                <label htmlFor="bookingDivision" className="block">How frequently can slots be booked?</label>
                 <select name="booking_division" id="bookingDivision" className="block"
                         onChange={(e) => handleDivision(e)} value={selectedDivision || ''}>
                     {
@@ -101,8 +101,8 @@ export default function CalendarDivision(props) {
                 </select>
             </div>
             <div className="flex flex-wrap -mx-4">
-                <div className="px-4">
-                    <label htmlFor="bookingMaximum" className="mb-2 block">What is the maximum time that can be
+                <div className="px-4 flex-1">
+                    <label htmlFor="bookingMaximum" className="block">What is the maximum time that can be
                         booked?</label>
                     <select name="booking_maximum" id="bookingMaximum" className="block"
                             onChange={(e) => handleInterval(e)} data-interval="max" value={selectedMaxInterval.value || ''}>
@@ -114,8 +114,8 @@ export default function CalendarDivision(props) {
                         }
                     </select>
                 </div>
-                <div className="px-4">
-                    <label htmlFor="bookingMinimum" className="mb-2 block">What is the minimum time that can be
+                <div className="px-4 flex-1">
+                    <label htmlFor="bookingMinimum" className="block">What is the minimum time that can be
                         booked?</label>
                     <select name="booking_minimum" id="bookingMinimum" className="block"
                             onChange={(e) => handleInterval(e)} data-interval="min" value={selectedMinInterval.value || ''}>

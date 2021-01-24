@@ -24,13 +24,13 @@ class CalendarBuilder extends Component {
     render() {
         return (
             <>
-                <div className="mb-12">
+                <div className="mb-60">
                     <CalendarType />
                 </div>
-                <div className="mb-12">
+                <div className="mb-60">
                     <CalendarDivision updateDivision={this.handleDivisionChange} />
                 </div>
-                <div className="mb-12">
+                <div className="mb-60">
                     <CalendarDefaults division={this.state.division} min={this.state.min} max={this.state.max} />
                 </div>
                 <div>

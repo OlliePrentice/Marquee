@@ -55,7 +55,7 @@ class AddSpace extends Component {
                             <a href="/"
                                className="text-xl font-medium text-gray-600 font-display">marquee.io</a>
                         </div>
-                        <div className="max-w-3xl mx-auto pt-20 pb-20">
+                        <div className="max-w-4xl mx-auto pt-20 pb-20">
                             <form>
                                 {this.state.page === 1 && <SearchLocationInput pageHandler={this.pageHandler}/>}
                                 {this.state.page === 2 &&
