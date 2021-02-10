@@ -30,7 +30,9 @@ module.exports = {
     extend: {
       margin: ['last'],
       textColor: ['important'],
-      display: ['important']
+      display: ['important'],
+      borderWidth: ['first', 'last'],
+      borderRadius: ['first', 'last'],
     },
   },
   plugins: [

@@ -88,8 +88,12 @@ export default function CalendarDivision(props) {
 
     return (
         <>
+            <h3 className="text-lg font-medium block mb-12">Now for a few basic settings...</h3>
             <div className="mb-12">
-                <h3 className="text-lg font-medium block mb-20">Now for a few basic settings...</h3>
+                <label htmlFor="bookingSlots">How many bookings can be made per slot?</label>
+                <input type="number" id="booingSlots" name="booking_slots" min="1" defaultValue="1"/>
+            </div>
+            <div className="mb-12">
                 <label htmlFor="bookingDivision" className="block">How frequently can slots be booked?</label>
                 <select name="booking_division" id="bookingDivision" className="block"
                         onChange={(e) => handleDivision(e)} value={selectedDivision || ''}>

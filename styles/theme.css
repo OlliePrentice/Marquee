@@ -87,3 +87,65 @@ a, button {
         }
     }
 }
+
+.calendar-picker__main {
+    .react-calendar {
+        border: none;
+        overflow: hidden;
+
+        @apply w-full shadow-lg rounded-lg;
+
+        &__tile {
+            position: relative;
+            padding-top: 3.4em;
+            padding-bottom: 3.4em;
+
+            &.expired {
+                .date-actions {
+                    display: none!important;
+                    pointer-events: none!important;
+                }
+            }
+
+            &:disabled {
+                @apply bg-gray-50 text-gray-300;
+
+            }
+
+            &--now {
+                @apply bg-white;
+            }
+
+
+
+            &:enabled:hover, &:enabled:focus, &--now:enabled:hover, &--now:enabled:focus {
+                @apply bg-gray-200;
+            }
+
+            &.react-calendar__tile--active, &.react-calendar__tile--active:enabled:hover, &.react-calendar__tile--active:enabled:focus {
+                @apply bg-green-400 text-white;
+
+            }
+
+        }
+
+        .react-calendar__navigation button[disabled], .react-calendar__navigation button:enabled:hover, .react-calendar__navigation button:enabled:focus {
+            @apply bg-gray-200;
+        }
+
+        &__navigation__label {
+            pointer-events: none;
+        }
+
+        &__month-view__weekdays__weekday {
+            abbr {
+                text-decoration: none;
+            }
+        }
+
+
+        &__month-view__days__day--weekend {
+            color: inherit;
+        }
+    }
+}

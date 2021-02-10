@@ -20,7 +20,7 @@ export default function Hero() {
 
                 <div
                     className="absolute bottom-0 right-0 z-0 transform translate-x-1/3 translate-y-1/3 pointer-events-none -scale-x-100">
-                    <motion.div animate={{x: [-30, 0, -30], y: [30, 0, 30]}}
+                    <motion.div animate={{x: [-30, 0, -30], y: [0, 30, 0]}}
                                 transition={{repeat: Infinity, duration: 5}}>
                         <Lottie animationData={trumpetAnimation.default} style={{width: 1000, height: 1000}}/>
                     </motion.div>

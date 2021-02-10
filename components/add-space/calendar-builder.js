@@ -1,8 +1,8 @@
 import {Component} from 'react';
 import FormButton from "../elements/form-button";
-import CalendarType from "./calendar-sections/calendar-type";
 import CalendarDivision from "./calendar-sections/calendar-division";
 import CalendarDefaults from "./calendar-sections/calendar-defaults";
+import CalendarPicker from "./calendar-sections/calendar-picker";
 
 class CalendarBuilder extends Component {
     constructor(props) {
@@ -24,14 +24,14 @@ class CalendarBuilder extends Component {
     render() {
         return (
             <>
-                <div className="mb-60">
-                    <CalendarType />
-                </div>
-                <div className="mb-60">
+                <div className="mb-20">
                     <CalendarDivision updateDivision={this.handleDivisionChange} />
                 </div>
-                <div className="mb-60">
+                <div className="mb-20">
                     <CalendarDefaults division={this.state.division} min={this.state.min} max={this.state.max} />
+                </div>
+                <div className="mb-20">
+                    <CalendarPicker division={this.state.division} min={this.state.min} max={this.state.max} />
                 </div>
                 <div>
                     <FormButton type="button" title="Next" pageNumber={5}

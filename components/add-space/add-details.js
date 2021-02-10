@@ -15,9 +15,9 @@ export default function AddDetails(props) {
             onDrop: (acceptedFiles, rejectedFiles) => {
                 const newErrors = [...errors];
 
-                if(rejectedFiles.length) {
-                    rejectedFiles.map(({ errors }) => {
-                        errors.map(({ message }) => {
+                if (rejectedFiles.length) {
+                    rejectedFiles.map(({errors}) => {
+                        errors.map(({message}) => {
                             newErrors.push(message);
                         });
                     });
@@ -30,7 +30,7 @@ export default function AddDetails(props) {
                     acceptedFiles.push(file);
                 });
 
-                if(acceptedFiles.length > 5) {
+                if (acceptedFiles.length > 5) {
 
                     newErrors.push('Maximum of 5 images');
                     setErrors(newErrors.filter((value, index, self) => self.indexOf(value) === index));
@@ -54,8 +54,8 @@ export default function AddDetails(props) {
 
 
     const remove = file => {
-        const newFiles = [...files];     // make a var for the new array
-        newFiles.splice(file, 1);        // remove the file from the array
+        const newFiles = [...files];
+        newFiles.splice(file, 1);
         setFiles(newFiles.map(file => Object.assign(file, {
             preview: URL.createObjectURL(file)
         })));
@@ -79,7 +79,6 @@ export default function AddDetails(props) {
         files.forEach(file => URL.revokeObjectURL(file.preview));
 
     }, [files]);
-
 
 
     return (
