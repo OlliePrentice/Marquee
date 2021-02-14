@@ -148,7 +148,18 @@ export default function Carousel({heading, cards}) {
 
             <Swiper
                 spaceBetween={20}
-                slidesPerView={4}
+                slidesPerView={1}
+                breakpoints={{
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                    },
+                    1280: {
+                      slidesPerView: 4,
+                    },
+                  }}
                 className="overflow-visible"
             >
                 {items.map((item, i) => {

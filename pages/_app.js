@@ -1,14 +1,10 @@
 import '../styles/App.css'
 import 'swiper/swiper-bundle.min.css'
-import { Provider } from 'next-auth/client'
-import { config, library } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
+import registerIcons from '../lib/registerIcons';
+import { Provider } from 'next-auth/client'
 
-config.autoAddCss = false;
-library.add(fab, faArrowAltCircleRight);
-
+registerIcons();
 global.__localeId__ = 'en';
 
 export default function App ({ Component, pageProps }) {

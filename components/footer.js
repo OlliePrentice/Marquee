@@ -7,15 +7,15 @@ export default function Footer() {
 
     return (
         <footer className="main-footer bg-gray-100 z-50">
-            <div className="container mx-auto px-3">
+            <div className="container mx-auto">
                 <div className="py-10">
                     <div className="mb-10">
                         <a href="/"
                            className="main-header__logo-link text-lg font-medium text-gray-600 font-display">marquee.io</a>
                     </div>
                     <nav>
-                        <ul className="flex flex-wrap">
-                            <li className="w-1/4">
+                        <ul className="flex flex-wrap -mx-4">
+                            <li className="w-full xs:w-1/2 md:w-1/4 px-4 mb-4">
                                 <a href="/" className="font-bold uppercase text-sm mb-4 inline-block tracking-wide">About</a>
                                 <ul>
                                     <li className="mb-2">
@@ -32,7 +32,7 @@ export default function Footer() {
                                     </li>
                                 </ul>
                             </li>
-                            <li className="w-1/4">
+                            <li className="w-full xs:w-1/2 md:w-1/4 px-4 mb-4">
                                 <a href="/" className="font-bold uppercase text-sm mb-4 inline-block tracking-wide">Support</a>
                                 <ul>
                                     <li className="mb-2">
@@ -49,7 +49,7 @@ export default function Footer() {
                                     </li>
                                 </ul>
                             </li>
-                            <li className="w-1/4">
+                            <li className="w-full xs:w-1/2 md:w-1/4 px-4 mb-4">
                                 <a href="/" className="font-bold uppercase text-sm mb-4 inline-block tracking-wide">Get Involved</a>
                                 <ul>
                                     <li className="mb-2">
@@ -57,7 +57,7 @@ export default function Footer() {
                                     </li>
                                 </ul>
                             </li>
-                            <li className="w-1/4">
+                            <li className="w-full xs:w-1/2 md:w-1/4 px-4 mb-4">
                                 <a href="/" className="font-bold uppercase text-sm mb-4 inline-block tracking-wide">Account</a>
                                 <ul>
                                     <li className="mb-2">
@@ -75,12 +75,12 @@ export default function Footer() {
                 </div>
             </div>
             <div className="border-t py-5">
-                <div className="container mx-auto px-3">
-                    <div className="flex flex-wrap">
-                        <div className="flex-1">
+                <div className="container mx-auto">
+                    <div className="xs:flex flex-wrap -mx-4">
+                        <div className="xs:flex-1 py-1 px-4">
                             <span className="text-sm">Marquee, Inc. &copy; {new Date().getFullYear()}. All rights reserved.</span>
                         </div>
-                        <div>
+                        <div className="px-4 py-1">
                             <ul className="font-zero -mx-3">
                                 <li className="inline-block px-3">
                                     <a href="/" className="hover:text-green-500">

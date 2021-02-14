@@ -1,0 +1,25 @@
+.hero__animation > div > div {
+    width: 300px;
+    height: 300px;
+}
+
+@media (min-width: $md) {
+    .hero__animation > div > div {
+        width: 500px;
+        height: 500px;
+    }
+}
+
+@media (min-width: $xl) {
+    .hero__animation > div > div {
+        width: 750px;
+        height: 750px;
+    }
+}
+
+@media (min-width: $xxl) {
+    .hero__animation > div > div {
+        width: 1000px;
+        height: 1000px;
+    }
+}

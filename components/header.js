@@ -1,24 +1,23 @@
 import {signIn, signOut, useSession} from 'next-auth/client'
 import Lottie from "lottie-react";
 import * as userAnimation from '../public/icons/user.json'
-import Link from "next/link";
 
 export default function Header() {
-    const [session, loading] = useSession();
+    const [session] = useSession();
 
     return (
-        <header className="main-header bg-white fixed w-full top-0 left-0 z-50">
-            <div className="container mx-auto px-3">
+        <header className="main-header bg-white md:fixed w-full top-0 left-0 z-50">
+            <div className="container mx-auto">
                 <div className="flex -mx-2 items-center">
-                    <div className="flex-1 px-2">
-                        <div className="main-header__logo">
+                    <div className="flex-1 px-2 text-center md:text-left">
+                        <div className="main-header__logo py-10 md:py-0">
                             <a href="/"
                                className="main-header__logo-link text-lg font-medium text-gray-600 font-display">marquee.io</a>
                         </div>
                     </div>
 
 
-                    <div className="flex-1 px-2 text-right">
+                    <div className="flex-1 px-2 text-right hidden md:block">
                         <nav className="main-header__nav text-zero">
                             <ul>
                                 <li className="relative">
@@ -40,6 +39,7 @@ export default function Header() {
                                             <span className="block p-1 bg-white rounded-full mx-1">
                                             <Lottie animationData={userAnimation.default}
                                                     style={{width: 24, height: 24}}/>
+                                                    <span className="sr-only">Sign In</span>
                                             </span>
                                         </button>
                                     </>}
@@ -50,6 +50,7 @@ export default function Header() {
                                             <span className="block bg-white p-0.5 rounded-full mx-1">
                                                 <img src={session.user.image} alt="User Image"
                                                      className="w-7 h-7 rounded-full"/>
+                                                     <span className="sr-only">Sign Out</span>
                                             </span>
                                         </button>
                                     </>}

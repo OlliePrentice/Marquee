@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   purge: {
@@ -23,8 +24,24 @@ module.exports = {
       },
       padding: {
         'full': '100%'
-      }
+      },
+      scale: {
+        '-100': '-1'
+      },
     },
+    screens: {
+      'xs': '420px',
+      ...defaultTheme.screens,
+    },
+    container: {
+      screens: {
+        'xs': "100%",
+        ...defaultTheme.screens,
+      },
+      padding: {
+        DEFAULT: '1rem',
+      }
+    }
   },
   variants: {
     extend: {

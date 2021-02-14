@@ -57,7 +57,7 @@ export default function SignIn({providers, siteUrl}) {
                             <div
                                 className="flex flex-wrap bg-white rounded-lg relative overflow-hidden shadow-xl">
                                 <div
-                                    className="flex-1 text-center p-20 flex items-center justify-center">
+                                    className="md:flex-1 w-full text-center px-4 py-14 md:py-20 lg:p-20 flex items-center justify-center">
                                     <div>
                                         <h1 className="font-bold text-3xl mb-5">Hello there!</h1>
                                         <p className="font-light">Sign in with your preferred provider and find your
@@ -66,7 +66,7 @@ export default function SignIn({providers, siteUrl}) {
                                     </div>
                                 </div>
                                 <div
-                                    className="text-center flex-1 bg-gradient-to-br from-green-400 to-green-500 p-20 flex items-center justify-center">
+                                    className="text-center w-full md:flex-1 bg-gradient-to-br from-green-400 to-green-500 px-4 py-10 lg:p-20 flex items-center justify-center">
                                     <div className="mt-3">
                                         {Object.values(providers).map(provider => (
                                             <div key={provider.name} className="mb-3">

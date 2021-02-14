@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Header from "../components/header";
 import Footer from "../components/footer";
+import MobileBar from "../components/mobile-bar";
 import Layout from "../components/layout";
 import Hero from "../components/hero";
 import Categories from "../components/categories";
@@ -16,6 +17,7 @@ export default function Home() {
                 <link rel="icon" href="/icons/favicon.ico"/>
             </Head>
             <Header/>
+            <MobileBar/>
             <Layout>
                 <Hero/>
                 <Categories/>

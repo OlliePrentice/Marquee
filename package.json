@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest --watch"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
@@ -20,6 +21,7 @@
     "mongodb": "^3.6.3",
     "next": "10.0.4",
     "next-auth": "^3.1.0",
+    "path": "^0.12.7",
     "react": "17.0.1",
     "react-calendar": "^3.3.1",
     "react-dom": "17.0.1",
@@ -30,10 +32,18 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.1.0",
+    "@testing-library/react": "^9.4.0",
     "autoprefixer": "^10.0.2",
+    "babel-jest": "^26.6.3",
+    "fetch-mock": "^9.11.0",
+    "jest": "^26.6.3",
+    "jest-canvas-mock": "^2.3.1",
     "postcss": "^8.2.1",
     "postcss-import": "^13.0.0",
     "postcss-nested": "^5.0.1",
+    "postcss-variables": "^1.1.1",
+    "react-test-renderer": "^16.12.0",
     "tailwindcss": "^2.0.1"
   },
   "resolutions": {
