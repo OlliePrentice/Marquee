@@ -3,21 +3,21 @@
     height: 300px;
 }
 
-@media (min-width: $md) {
+@screen md {
     .hero__animation > div > div {
         width: 500px;
         height: 500px;
     }
 }
 
-@media (min-width: $xl) {
+@screen xl {
     .hero__animation > div > div {
         width: 750px;
         height: 750px;
     }
 }
 
-@media (min-width: $xxl) {
+@screen 2xl {
     .hero__animation > div > div {
         width: 1000px;
         height: 1000px;

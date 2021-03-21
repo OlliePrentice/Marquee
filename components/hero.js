@@ -1,8 +1,8 @@
 import Lottie from "lottie-react";
-import {motion} from "framer-motion"
-import * as guitarAnimation from '../public/icons/electric-guitar-music.json'
-import * as trumpetAnimation from '../public/icons/trumpet-music.json'
-import * as scrollDownAnimation from '../public/icons/scroll-down.json'
+import {motion} from "framer-motion";
+import * as guitarAnimation from '../public/icons/electric-guitar-music.json';
+import * as trumpetAnimation from '../public/icons/trumpet-music.json';
+import * as scrollDownAnimation from '../public/icons/scroll-down.json';
 
 export default function Hero() {
 

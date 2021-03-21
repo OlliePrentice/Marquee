@@ -6,5 +6,4 @@
 import '@testing-library/jest-dom/extend-expect';
 import registerIcons from './lib/registerIcons';
 
-
 registerIcons();

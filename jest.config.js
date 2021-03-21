@@ -4,6 +4,7 @@ module.exports = {
       '!**/*.d.ts',
       '!**/node_modules/**',
     ],
+    globalSetup: '<rootDir>/env/config.js',
     setupFilesAfterEnv: ['<rootDir>/setupTests.js', "jest-canvas-mock"],
     testPathIgnorePatterns: ['/node_modules/', '/.next/'],
     transform: {

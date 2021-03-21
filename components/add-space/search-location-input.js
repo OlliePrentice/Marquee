@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import FormLabel from '../elements/form-label';
 
 let autoComplete;
 
@@ -37,7 +38,7 @@ function handleScriptLoad(updateQuery, autoCompleteRef) {
     );
 }
 
-async function handlePlaceSelect(updateQuery, updateValidity) {
+async function handlePlaceSelect(updateQuery, _updateValidity) {
     const addressObject = autoComplete.getPlace();
     const address = addressObject.formatted_address;
 
@@ -67,7 +68,7 @@ function SearchLocationInput(props) {
 
     return (
         <div className="search-location-input">
-            <label htmlFor="addressSearch" className="text-2xl block mb-4">Enter your spaces address:</label>
+            <FormLabel htmlFor="addressSearch">Enter your spaces address:</FormLabel>
             <div className="relative">
                 <input
                     id="addressSearch"

@@ -1,93 +1,52 @@
 import { Component } from 'react';
-import axios from "axios";
-import FormButton from "../elements/form-button";
-
-const blankItems = [];
-for (let i = 0; i < 5; i++) {
-    blankItems.push({name: ".....", title: "....."});
-}
-
+import FormButton from '../elements/form-button';
+import FormLabel from '../elements/form-label';
 export default class AddCategories extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {subCategories: blankItems, subCategoriesActive: false, pageComplete: false};
-        this.categoryHandler = this.categoryHandler.bind(this);
+        this.state = {pageComplete: false, checkedItems: []};
+        this.handleChecked = this.handleChecked.bind(this);
         this.handlePageComplete = this.handlePageComplete.bind(this);
     }
 
-    handlePageComplete(complete) {
+    handleChecked(e, item) {
+        const itemsArray = [...this.state.checkedItems];
+
+        if(e.target.checked) {
+            itemsArray.push(item);
+        } else {
+            itemsArray.splice(item, 1);
+        }
+        
         this.setState({
-            pageComplete: complete,
-        });
+            checkedItems: itemsArray,
+        })
+
+        this.handlePageComplete(itemsArray);
     }
 
-    async categoryHandler(val) {
+    handlePageComplete(items) {
 
-        try {
-            const response = await axios.get('/api/add-space/subcategories', {
-                params: {
-                    category: val
-                }
-            });
-
-            if (response.data.subCategories.length) {
-                this.setState({
-                    subCategories: response.data.subCategories,
-                    subCategoriesActive: true
-                });
-            } else {
-                this.setState({
-                    subCategories: blankItems,
-                    subCategoriesActive: false
-                });
-            }
-
-        } catch (err) {
-            console.log(err);
-
-            this.setState({
-                subCategories: blankItems,
-                subCategoriesActive: false
-            });
-
-        }
-
+        this.setState({
+            pageComplete: items.length > 0 ? true : false,
+        });
     }
 
 
     render() {
         return (
             <div>
-
                 <div className="relative mb-12">
-                    <h3 className="text-2xl block mb-4">Select a category:</h3>
+                    <FormLabel>Pick some tags:</FormLabel>
                     <ul className="-mx-2">
                         {this.props.categories.map((item, i) => {
                             return (
                                 <li key={i} className="mb-3 inline-block px-2">
-                                    <input type="radio" onChange={() => this.categoryHandler(item)} value={item.name}
+                                    <input type="checkbox" onChange={(e) => this.handleChecked(e, item.name)} value={item.name}
                                            id={item.name + '-category'}
                                            name="level_one_category"/>
-                                    <label htmlFor={item.name + '-category'} className="radio-btn">{item.title}</label>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
-
-                <div
-                    className={`relative mb-12 ${!this.state.subCategoriesActive && 'pointer-events-none opacity-50'}`}>
-                    <h3 className="text-2xl block mb-4">Pick a subcategory:</h3>
-                    <ul className="-mx-2">
-                        {this.state.subCategories.map((item, i) => {
-                            return (
-                                <li key={i} className="mb-3 inline-block px-2">
-                                    <input type="radio" value={item.name}
-                                           id={item.name + '-category'}
-                                           onChange={() => this.handlePageComplete(true)}
-                                           name="level_two_category"/>
                                     <label htmlFor={item.name + '-category'} className="radio-btn">{item.title}</label>
                                 </li>
                             );

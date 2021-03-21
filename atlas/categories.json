@@ -1,98 +1,32 @@
 [
   {
-    "name": "studios",
-    "title": "Studios",
+    "name": "studio",
+    "title": "Studio",
     "parent": "/",
-    "category": "/studios"
+    "category": "/studio"
   },
   {
-    "name": "music_rehearsal",
-    "title": "Music Rehearsal",
-    "parent": "/studios",
-    "category": "/studios/music_rehearsal"
-  },
-  {
-    "name":  "recording",
-    "title": "Recording",
-    "parent": "/studios",
-    "category": "/studios/recording"
-  },
-  {
-    "name":  "photography",
-    "title": "Photography",
-    "parent": "/studios",
-    "category": "/studios/photography"
-  },
-  {
-    "name":  "meeting_rooms",
-    "title": "Meeting Rooms",
+    "name":  "meeting_room",
+    "title": "Meeting Room",
     "parent": "/",
-    "category": "/classes"
+    "category": "/classe"
   },
   {
-    "name":  "office",
-    "title": "Office",
-    "parent": "/meeting_rooms",
-    "category": "/meeting_rooms/office"
-  },
-  {
-    "name":  "function_rooms",
-    "title": "Function Rooms",
+    "name":  "function_room",
+    "title": "Function Room",
     "parent": "/",
-    "category": "/function_rooms"
+    "category": "/function_room"
   },
   {
-    "name":  "wedding",
-    "title": "Wedding",
-    "parent": "/function_rooms",
-    "category": "/function_rooms/wedding"
-  },
-  {
-    "name":  "party",
-    "title": "Party",
-    "parent": "/function_rooms",
-    "category": "/function_rooms/party"
-  },
-  {
-    "name":  "sports_venues",
-    "title": "Sports Venues",
+    "name":  "sports_venue",
+    "title": "Sports Venue",
     "parent": "/",
-    "category": "/sports_venues"
-  },
-  {
-    "name":  "tennis",
-    "title": "Tennis",
-    "parent": "/sports_venues",
-    "category": "/sports_venues/tennis"
-  },
-  {
-    "name":  "badminton",
-    "title": "Badminton",
-    "parent": "/sports_venues",
-    "category": "/sports_venues/badminton"
-  },
-  {
-    "name":  "squash",
-    "title": "Squash",
-    "parent": "/sports_venues",
-    "category": "/sports_venues/squash"
+    "category": "/sports_venue"
   },
   {
     "name":  "outdoor",
     "title": "Outdoor",
     "parent": "/",
     "category": "/outdoor"
-  },
-  {
-    "name":  "kayaking",
-    "title": "Kayaking",
-    "parent": "/outdoor",
-    "category": "/outdoor/kayaking"
-  },
-  {
-    "name":  "clay_pigeon",
-    "title": "Clay Pigeon",
-    "parent": "/outdoor",
-    "category": "/outdoor/clay_pigeon"
   }
 ]

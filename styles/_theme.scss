@@ -88,7 +88,7 @@ a, button {
     }
 }
 
-.calendar-picker__main {
+.calendar-picker {
     .react-calendar {
         border: none;
         overflow: hidden;
@@ -97,8 +97,8 @@ a, button {
 
         &__tile {
             position: relative;
-            padding-top: 3.4em;
-            padding-bottom: 3.4em;
+            padding-top: 3vw;
+            padding-bottom: 3vw;
 
             &.expired {
                 .date-actions {
@@ -115,7 +115,6 @@ a, button {
             &--now {
                 @apply bg-white;
             }
-
 
 
             &:enabled:hover, &:enabled:focus, &--now:enabled:hover, &--now:enabled:focus {

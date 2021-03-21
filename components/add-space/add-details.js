@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
-import {useDropzone} from "react-dropzone";
-import FormButton from "../elements/form-button";
+import {useDropzone} from 'react-dropzone';
+import FormButton from '../elements/form-button';
+import FormLabel from '../elements/form-label';
 
 export default function AddDetails(props) {
 
@@ -9,7 +10,7 @@ export default function AddDetails(props) {
     const [files, setFiles] = useState([]);
     const [errors, setErrors] = useState([]);
 
-    const {acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive} = useDropzone({
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({
             maxFiles: 5,
             accept: 'image/jpeg, image/png',
             onDrop: (acceptedFiles, rejectedFiles) => {
@@ -52,7 +53,6 @@ export default function AddDetails(props) {
         )
     });
 
-
     const remove = file => {
         const newFiles = [...files];
         newFiles.splice(file, 1);
@@ -84,7 +84,7 @@ export default function AddDetails(props) {
     return (
         <>
             <div className="mb-12">
-                <label htmlFor="spaceName" className="text-2xl block mb-4">Add the name of your space:</label>
+                <FormLabel htmlFor="spaceName">Add the name of your space:</FormLabel>
                 <input
                     id="spaceName"
                     placeholder="Enter a name"
@@ -92,16 +92,16 @@ export default function AddDetails(props) {
                 />
             </div>
             <div className="mb-12">
-                <label htmlFor="spaceName" className="text-2xl block mb-4">Add a description:</label>
+                <FormLabel htmlFor="spaceDesc">Add a description:</FormLabel>
                 <textarea
-                    id="spaceName"
+                    id="spaceDesc"
                     className="h-60"
                     placeholder="Enter a name"
                     onChange={(e) => setDescription(e.target.value)}
                 />
             </div>
             <div className="mb-12">
-                <label htmlFor="spaceName" className="text-2xl block mb-4">Add up to five images:</label>
+                <FormLabel>Add up to five images:</FormLabel>
                 <div {...getRootProps({className: 'dropzone mb-2'})}>
                     <input {...getInputProps()} />
                     {
