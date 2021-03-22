@@ -34,9 +34,10 @@ class CalendarBuilder extends Component {
                     <CalendarPicker division={this.state.division} min={this.state.min} max={this.state.max} />
                 </div>
                 <div>
-                    <FormButton type="button" title="Next" pageNumber={5}
+                    <FormButton type="button"
                                 disabled={true}
-                                pageHandler={this.props.pageHandler}/>
+                                onClick={() => this.props.pageHandler(5)}
+                                >Next</FormButton>
                 </div>
             </>
         )

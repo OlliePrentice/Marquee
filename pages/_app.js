@@ -1,4 +1,5 @@
 import '../styles/App.scss'
+import '../styles/Tailwind.scss'
 import 'swiper/swiper-bundle.min.css'
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import registerIcons from '../lib/registerIcons';

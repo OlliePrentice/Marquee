@@ -55,7 +55,9 @@ export default class AddCategories extends Component {
                 </div>
 
                 <div>
-                    <FormButton type="button" title="Next" disabled={!this.state.pageComplete && true} pageNumber={3} pageHandler={this.props.pageHandler}/>
+                    <FormButton type="button"
+                            disabled={!this.state.pageComplete}
+                            onClick={() => this.props.pageHandler(3)}>Next</FormButton>
                 </div>
 
             </div>

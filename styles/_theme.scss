@@ -18,14 +18,10 @@ a, button {
 }
 
 .btn {
-    text-decoration: none;
-    text-transform: uppercase;
-
-    @apply inline-block tracking-widest text-xxs py-3 px-5 bg-green-400 rounded text-center text-white font-medium transition hover:bg-green-500;
+    @apply inline-block tracking-widest no-underline uppercase text-xxs py-3 px-5 bg-green-400 rounded text-center text-white font-medium transition hover:bg-green-500;
 
     &.bg-white {
-        background: white;
-        @apply text-gray-700;
+        @apply bg-white text-gray-700;
     }
 
     &.btn--large {
@@ -33,8 +29,7 @@ a, button {
     }
 
     &.btn--form {
-        @apply rounded-lg;
-        @apply rounded-l-none;
+        @apply rounded-lg rounded-l-none;
     }
 
     &:disabled {
@@ -84,67 +79,6 @@ a, button {
 
         &:first-child {
             @apply border-transparent;
-        }
-    }
-}
-
-.calendar-picker {
-    .react-calendar {
-        border: none;
-        overflow: hidden;
-
-        @apply w-full shadow-lg rounded-lg;
-
-        &__tile {
-            position: relative;
-            padding-top: 3vw;
-            padding-bottom: 3vw;
-
-            &.expired {
-                .date-actions {
-                    display: none!important;
-                    pointer-events: none!important;
-                }
-            }
-
-            &:disabled {
-                @apply bg-gray-50 text-gray-300;
-
-            }
-
-            &--now {
-                @apply bg-white;
-            }
-
-
-            &:enabled:hover, &:enabled:focus, &--now:enabled:hover, &--now:enabled:focus {
-                @apply bg-gray-200;
-            }
-
-            &.react-calendar__tile--active, &.react-calendar__tile--active:enabled:hover, &.react-calendar__tile--active:enabled:focus {
-                @apply bg-green-400 text-white;
-
-            }
-
-        }
-
-        .react-calendar__navigation button[disabled], .react-calendar__navigation button:enabled:hover, .react-calendar__navigation button:enabled:focus {
-            @apply bg-gray-200;
-        }
-
-        &__navigation__label {
-            pointer-events: none;
-        }
-
-        &__month-view__weekdays__weekday {
-            abbr {
-                text-decoration: none;
-            }
-        }
-
-
-        &__month-view__days__day--weekend {
-            color: inherit;
         }
     }
 }

@@ -119,9 +119,9 @@ export default function AddDetails(props) {
             </div>
 
             <div>
-                <FormButton type="button" title="Next" pageNumber={4}
-                            disabled={(!name || !description || !files.length) && true}
-                            pageHandler={props.pageHandler}/>
+                <FormButton type="button"
+                            disabled={(!name || !description || !files.length)}
+                            onClick={() => props.pageHandler(4)}>Next</FormButton>
             </div>
 
         </>
