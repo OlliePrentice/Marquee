@@ -19,7 +19,7 @@ export default function CalendarPicker({division, min, max}) {
         if (dateFound > -1) {
             dates.splice(dateFound, 1);
         } else {
-            dates.push(date.getTime());
+            dates.push(date.setHours(0,0,0,0));
         }
 
         setUnavailable(dates);
@@ -40,7 +40,7 @@ export default function CalendarPicker({division, min, max}) {
             <span className="date-actions">
                 <FormButton
                     type="button"
-                    classNames="w-full btn--danger"
+                    classNames={`w-full btn ${!unavailable.includes(date.getTime()) && 'btn--danger'}`}
                     onClick={(e) => handleAvailabilityClick(e, date)}>
 
                     {!unavailable.includes(date.getTime()) && <>
@@ -66,6 +66,7 @@ export default function CalendarPicker({division, min, max}) {
 
         const foundDay = timepickers.findIndex(item => item.day === checkedDay);
 
+        //Find reason for double click
         if (foundDay > -1) {
             checkedDatesList.splice(foundDay, 1);
         } else {
@@ -105,8 +106,19 @@ export default function CalendarPicker({division, min, max}) {
                         onChange={(value) => handleDateClick(value)}
                         minDate={new Date()}
                         view="month"
-                        tileClassName={({date}) => date.getTime() < new Date().setHours(0, 0, 0, 0) ? 'expired' : null}
-                        tileDisabled={({date}) => unavailable.includes(date.getTime())}
+                        tileClassName={({date}) => {
+                            const tileClasses = [];
+
+                            if(date.getTime() < new Date().setHours(0, 0, 0, 0)) {
+                                tileClasses.push('expired');
+                            }
+
+                            if(unavailable.includes(date.setHours(0,0,0,0))) {
+                                tileClasses.push('unavailable');
+                            }
+
+                            return tileClasses;
+                        }}
                     />
                 </div>
                 
@@ -115,10 +127,13 @@ export default function CalendarPicker({division, min, max}) {
                         <div className="mb-8">
                             {calendarTileActions(timepicker.pickerDate)}
                         </div>
-                        <input type="hidden" name="calendar_special[]" value={timepicker.day} />
-                        <TimeSelects timepicker={timepicker} timepickers={timepickers} division={division}
+                        {division !== 'daily' &&
+                        <>
+                            <input type="hidden" name="calendar_special[]" value={timepicker.day} />
+                            <TimeSelects timepicker={timepicker} timepickers={timepickers} division={division}
                                     min={min}
                                     setTimepickers={setTimepickers}/>
+                        </>}
                     </Modal>
                 ))}
             </div>

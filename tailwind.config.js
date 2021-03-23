@@ -46,6 +46,7 @@ module.exports = {
   variants: {
     extend: {
       margin: ['last'],
+      backgroundColor: ['important'],
       textColor: ['important'],
       display: ['important'],
       borderWidth: ['first', 'last'],

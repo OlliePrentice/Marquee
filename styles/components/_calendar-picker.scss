@@ -10,30 +10,29 @@
             padding-top: 3.6vw;
             padding-bottom: 3.6vw;
 
-            &.expired {
-                .date-actions {
-                    display: none!important;
-                    pointer-events: none!important;
-                }
-            }
-
-            &:disabled {
-                @apply bg-gray-50 text-gray-300;
-
-            }
-
             &--now {
                 @apply bg-white;
             }
 
-
             &:enabled:hover, &:enabled:focus, &--now:enabled:hover, &--now:enabled:focus {
-                @apply bg-gray-200;
+                @apply bg-gray-200 text-gray-700;
             }
 
             &.react-calendar__tile--active, &.react-calendar__tile--active:enabled:hover, &.react-calendar__tile--active:enabled:focus {
-                @apply bg-green-400 text-white;
+                @apply bg-white text-gray-700;
 
+            }
+
+            &.expired {
+                @apply bg-gray-50 text-gray-300;
+            }
+
+            &.unavailable {
+                @apply bg-red-500 text-white;
+
+                &:hover, &:focus, &:enabled:hover, &:enabled:focus {
+                    @apply bg-red-400 text-white;
+                }
             }
 
         }
