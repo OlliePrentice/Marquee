@@ -1,7 +1,7 @@
 import {addMinutes, startOfDay} from "date-fns";
 import formatLocale from "../../utils/formatLocale";
 
-export default function TimeSelects({fieldPrefix = 'calendar', timepicker, timepickers, setTimepickers, division, min,}) {
+export default function TimeSelects({fieldPrefix = 'calendar', timepicker, timepickers, setTimepickers, division, min, minRemove = 0}) {
 
     let slotDivision;
 
@@ -84,9 +84,9 @@ export default function TimeSelects({fieldPrefix = 'calendar', timepicker, timep
 
             return (
                 <div key={i} className="flex flex-wrap -mx-2 mb-6">
-                    <div className="flex-1 px-2">
+                    <div className="flex-1 px-2 relative">
                         <label htmlFor={`${fieldPrefix}DayStart` + timepicker.day + i}
-                               className={`block mb-2 ${i !== 0 && 'sr-only'}`}>Start</label>
+                               className={`block mb-2 absolute -top-7 ${i !== 0 && 'sr-only'}`}>Start</label>
                         <select value={timepicker.starts[i].selected}
                                 name={`${fieldPrefix}_day_start_` + timepicker.day + `[]`}
                                 id={`${fieldPrefix}DayStart` + timepicker.day + i}
@@ -97,9 +97,9 @@ export default function TimeSelects({fieldPrefix = 'calendar', timepicker, timep
                             ))}
                         </select>
                     </div>
-                    <div className="flex-1 px-2">
+                    <div className="flex-1 px-2 relative">
                         <label htmlFor={`${fieldPrefix}DayEnd` + timepicker.day + i}
-                               className={`block mb-2 ${i !== 0 && 'sr-only'}`}>End</label>
+                               className={`block mb-2 absolute -top-7 ${i !== 0 && 'sr-only'}`}>End</label>
                         <select value={timepicker.ends[i].selected}
                                 name={`${fieldPrefix}_day_end_` + timepicker.day + `[]`}
                                 id={`${fieldPrefix}DayEnd` + timepicker.day + i}
@@ -112,7 +112,7 @@ export default function TimeSelects({fieldPrefix = 'calendar', timepicker, timep
                     </div>
                     <div className="px-2">
                         <div className="relative w-5 h-full">
-                            {i !== 0 &&
+                            {i > minRemove &&
                             <span
                                 className="block absolute top-1/2 left-0 transform -translate-y-1/2 w-5 h-5 bg-red-500 rounded-full z-5 text-white cursor-pointer hover:opacity-70"
                                 onClick={() => removeSlot(i, timepicker)}><svg

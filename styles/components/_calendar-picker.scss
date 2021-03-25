@@ -35,6 +35,14 @@
                 }
             }
 
+            &.active {
+                @apply bg-green-500 text-white;
+
+                &:hover, &:focus, &:enabled:hover, &:enabled:focus {
+                    @apply bg-green-400 text-white;
+                } 
+            }
+
         }
 
         .react-calendar__navigation button[disabled], .react-calendar__navigation button:enabled:hover, .react-calendar__navigation button:enabled:focus {
