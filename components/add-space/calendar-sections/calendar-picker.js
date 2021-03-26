@@ -6,91 +6,69 @@ import {format} from 'date-fns';
 import usePrevious from "../../../utils/usePrevious";
 import Modal from "../../elements/modal";
 import FormButton from "../../elements/form-button";
+import FormSectionHeading from "../../elements/form-section-heading";
 
 export default function CalendarPicker({division, min, max}) {
     const prevProps = usePrevious({division, min, max});
     const [unavailable, setUnavailable] = useState([]);
     const [timepickers, setTimepickers] = useState([]);
 
-    function handleAvailabilityClick(e, date) {
-        e.stopPropagation();
-        const dates = [...unavailable];
-        const dateFound = dates.indexOf(date);
+    function handleAvailabilityClick(date) {
+        const unavailableDates = [...unavailable];
+        const dateFound = unavailableDates.indexOf(date);
+        
         if (dateFound > -1) {
-            dates.splice(dateFound, 1);
+
+            unavailableDates.splice(dateFound, 1);
+
         } else {
-            dates.push(date);
-        }
 
-        setUnavailable(dates);
+            unavailableDates.push(date);
 
-        if (dateFound === -1) {
-            const checkedDay = format(date, 'Y-MM-dd');
             const checkedDatesList = [...timepickers];
+            const foundDay = timepickers.findIndex(item => item.pickerDate === date);
 
-            const foundDay = timepickers.findIndex(item => item.day === checkedDay);
             if (foundDay > -1) {
                 checkedDatesList.splice(foundDay, 1);
             }
 
             setTimepickers(checkedDatesList);
         }
+
+        setUnavailable(unavailableDates);
+
     }
 
-    function calendarTileActions(date) {
-        return (
-            <>
-                <FormButton
-                    type="button"
-                    classNames={`w-full btn ${!unavailable.includes(date) && 'btn--danger'}`}
-                    onClick={(e) => handleAvailabilityClick(e, date)}>
-
-                    {!unavailable.includes(date) && <>
-                    Set date as unavailable
-                    </>}
-
-                    {unavailable.includes(date) && <>
-                    Set date as available
-                    </>}
-
-                </FormButton>
-            </>
-        )
-    }
-
-    function enableSpecialTimepicker(date) {
-        const checkedDay = format(date, 'Y-MM-dd');
-        const checkedDatesList = [...timepickers];
-
-        const foundDay = timepickers.findIndex(item => item.day === checkedDay);
-
-        if (foundDay > -1) {
-            checkedDatesList[foundDay].count = 1;
-            checkedDatesList[foundDay].starts = [{selected: 0}];
-            checkedDatesList[foundDay].ends = [{selected: min}];
-        }
-
-        setTimepickers(checkedDatesList);
-    }
-
+ 
     function handleDateClick(date) {
-        const checkedDay = format(date, 'Y-MM-dd');
         const checkedDatesList = [...timepickers];
+        const foundDay = timepickers.findIndex(item => item.pickerDate === date);
 
         checkedDatesList.forEach((item) => {
             item.active = false;
         });
 
-        const foundDay = timepickers.findIndex(item => item.day === checkedDay);
-
         if (foundDay > -1) {
             checkedDatesList[foundDay].active = true;
         } else {
-            checkedDatesList.push({active: true, day: checkedDay, pickerDate: date.setHours(0,0,0,0), count: 0, starts: [{selected: 0}], ends: [{selected: min}]})
+            checkedDatesList.push({active: true, day: format(date, 'Y-MM-dd'), pickerDate: date, count: 0, starts: [{selected: 0}], ends: [{selected: min}]})
         }
 
         setTimepickers(checkedDatesList);
     }
+
+    function enableSpecialTimepicker(date) {
+        
+        const checkedDatesList = [...timepickers];
+        const foundDay = timepickers.findIndex(item => item.pickerDate === date);
+
+        if (foundDay > -1) {
+            checkedDatesList[foundDay].count = 1;
+        }
+
+        setTimepickers(checkedDatesList);
+    }
+
 
     function handleModalClose() {
 
@@ -104,36 +82,46 @@ export default function CalendarPicker({division, min, max}) {
     }
 
     useEffect(() => {
-        if (prevProps !== undefined) {
-            if (prevProps.division !== division || prevProps.min !== min || prevProps.max !== max) {
-                setTimepickers([]);
-            }
+        if (prevProps !== undefined && (prevProps.division !== division || prevProps.min !== min || prevProps.max !== max)) {
+            setTimepickers([]);
         }
     }, [division, min, max]);
 
     return (
         <>
             <div className="calendar-picker relative">
-                <h3 className="text-lg font-medium block mb-12">Set unavailable days and special slots...</h3>
+                <FormSectionHeading>{division === 'daily' ? 'Set unavailable days' : 'Set unavailable and special days'}</FormSectionHeading>
 
                 <div className="calendar-picker__main">
                     <Calendar
                         id="lang-switcher"
-                        onChange={(value) => handleDateClick(value)}
+                        onChange={(date) => {
+                            const dateStart = date.setHours(0,0,0,0);
+
+                            if(division === 'daily') {
+                                handleAvailabilityClick(dateStart);
+                            } else {
+                                handleDateClick(dateStart)
+                            }
+
+                        }}
                         minDate={new Date()}
                         view="month"
                         tileClassName={({date}) => {
+                            const dateStart = date.setHours(0,0,0,0);
                             const tileClasses = [];
 
-                            if(date.getTime() < new Date().setHours(0, 0, 0, 0)) {
+                            if(dateStart < new Date().setHours(0, 0, 0, 0)) {
                                 tileClasses.push('expired');
                             }
 
-                            if(unavailable.includes(date.setHours(0,0,0,0))) {
+                            if(unavailable.includes(dateStart)) {
                                 tileClasses.push('unavailable');
                             }
 
-                            if(timepickers.findIndex(item => item.pickerDate === date.setHours(0,0,0,0)) > -1) {
+                            const foundIndex = timepickers.findIndex(item => item.pickerDate === dateStart);
+
+                            if(foundIndex !== -1 && timepickers[foundIndex].count) {
                                 tileClasses.push('active');
                             }
 
@@ -145,7 +133,20 @@ export default function CalendarPicker({division, min, max}) {
                 {timepickers.map((timepicker, i) => (
                     <Modal key={i} className={timepicker.active ? 'block' : 'hidden'} closeModal={handleModalClose}>
                         <div className="mb-5">
-                            {calendarTileActions(timepicker.pickerDate)}
+                            <FormButton
+                                type="button"
+                                classNames={`w-full btn ${!unavailable.includes(timepicker.pickerDate) && 'btn--danger'}`}
+                                onClick={() => handleAvailabilityClick(timepicker.pickerDate)}>
+
+                                {!unavailable.includes(timepicker.pickerDate) && <>
+                                Set date as unavailable
+                                </>}
+
+                                {unavailable.includes(timepicker.pickerDate) && <>
+                                Set date as available
+                                </>}
+
+                            </FormButton>
                         </div>
                         {division !== 'daily' && !unavailable.includes(timepicker.pickerDate) &&
                         <>

@@ -1,5 +1,6 @@
-import {useEffect, useState} from 'react';
+import { useState } from 'react';
 import getIntervalRange from "../../../utils/getIntervalRange";
+import FormSectionHeading from "../../elements/form-section-heading";
 
 export default function CalendarDivision(props) {
 
@@ -88,9 +89,9 @@ export default function CalendarDivision(props) {
 
     return (
         <>
-            <h3 className="text-lg font-medium block mb-12">Now for a few basic settings...</h3>
+            <FormSectionHeading>Configure some basic settings</FormSectionHeading>
             <div className="mb-12">
-                <label htmlFor="bookingSlots">How many bookings can be made per slot?</label>
+                <label htmlFor="bookingSlots" className="block">How many bookings can be made per slot?</label>
                 <input type="number" id="booingSlots" name="booking_slots" min="1" defaultValue="1"/>
             </div>
             <div className="mb-12">

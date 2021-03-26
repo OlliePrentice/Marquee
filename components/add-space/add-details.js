@@ -56,9 +56,11 @@ export default function AddDetails(props) {
     const remove = file => {
         const newFiles = [...files];
         newFiles.splice(file, 1);
+
         setFiles(newFiles.map(file => Object.assign(file, {
             preview: URL.createObjectURL(file)
         })));
+   
     };
 
     const thumbs = files.map((file, i) => (

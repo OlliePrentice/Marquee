@@ -1,3 +1,5 @@
+import FormSectionHeading from "../../elements/form-section-heading";
+
 export default function CalendarType() {
 
     const types = [
@@ -17,7 +19,7 @@ export default function CalendarType() {
 
     return (
         <>
-            <h3 className="text-lg block font-medium mb-20">Select a calendar type...</h3>
+            <FormSectionHeading>Select a calendar type</FormSectionHeading>
             {types.map((type, index) => {
 
                 let label = '';

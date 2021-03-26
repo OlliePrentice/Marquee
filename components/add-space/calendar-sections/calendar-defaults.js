@@ -1,9 +1,9 @@
-import {addDays, startOfWeek, addHours, startOfDay, addMinutes} from 'date-fns'
+import {addDays, startOfWeek } from 'date-fns'
 import formatLocale from "../../../utils/formatLocale";
 import {useState, useEffect} from "react";
 import usePrevious from "../../../utils/usePrevious";
 import TimeSelects from "../../elements/time-selects";
-
+import FormSectionHeading from "../../elements/form-section-heading";
 
 function CalendarDefaults({division, min, max}) {
 
@@ -43,7 +43,8 @@ function CalendarDefaults({division, min, max}) {
 
     return (
         <>
-            <h3 className="text-lg font-medium block mb-12">{division === 'daily' ? 'Set your default opening days' : 'Set your default opening hours'}...</h3>
+            <FormSectionHeading>{division === 'daily' ? 'Set your default opening days' : 'Set your default opening hours'}</FormSectionHeading>
+
             {weekDays.map((day, i) => {
                     const timepicker = timepickers.find(obj => {
                         return obj.day === day.toLowerCase();
@@ -67,7 +68,7 @@ function CalendarDefaults({division, min, max}) {
                                 </div>
                                 {division !== 'daily' && dayChecked &&
                                 <>
-                                    <div className="px-4 flex-1 -mx-2 mb-10">
+                                    <div className="pt-8 px-4 flex-1 -mx-2 mb-10">
                                         <TimeSelects fieldPrefix="default" timepicker={timepicker} timepickers={timepickers} division={division} min={min} setTimepickers={setTimepickers}/>
                                     </div>
                                 </>
