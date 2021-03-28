@@ -26,7 +26,7 @@ export default function TimeSelects({fieldPrefix = 'calendar', timepicker, timep
     }
 
 
-    const firstSlot = startOfDay(new Date());
+    const firstSlot = startOfDay(new Date(1994, 5, 19));
     const slotStarts = Array.from(Array(slotDivision)).map((_e, i) => formatLocale(addMinutes(firstSlot, ((((i - 1) * 60) / (slotDivision / 24)) + 60 / (slotDivision / 24))), 'h:mma'));
     const slotEnds = Array.from(Array(slotDivision)).map((_e, i) => formatLocale(addMinutes(firstSlot, ((((i) * 60) / (slotDivision / 24)) + 60 / (slotDivision / 24))), 'h:mma'));
 
@@ -77,7 +77,8 @@ export default function TimeSelects({fieldPrefix = 'calendar', timepicker, timep
     };
 
     function renderSelects() {
-        return Array.from(Array(timepicker.count)).map((val, i) => {
+        console.log(slotStarts);
+        return Array.from(Array(timepicker.count)).map((_val, i) => {
 
             const prevEnd = timepicker.ends[i - 1] !== undefined ? timepicker.ends[i - 1].selected : false;
             const nextStart = timepicker.starts[i + 1] !== undefined ? timepicker.starts[i + 1].selected : false;
