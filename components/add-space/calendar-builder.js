@@ -1,47 +1,31 @@
-import {Component} from 'react';
-import FormButton from "../elements/form-button";
+import { useState } from 'react';
 import CalendarDivision from "./calendar-sections/calendar-division";
 import CalendarDefaults from "./calendar-sections/calendar-defaults";
 import CalendarPicker from "./calendar-sections/calendar-picker";
 
-class CalendarBuilder extends Component {
-    constructor(props) {
-        super(props);
+export default function CalendarBuilder() {
 
-        this.state = {division: 'daily', min: 0, max: 0};
+    const [division, setDivision] = useState('daily');
+    const [min, setMin] = useState(0);
+    const [max, setMax] = useState(0);
 
-        this.handleDivisionChange = this.handleDivisionChange.bind(this);
+    function handleDivisionChange(division, min, max) {
+        setDivision(division);
+        setMin(min);
+        setMax(max);
     }
 
-    handleDivisionChange(division, min, max) {
-        this.setState({
-            division,
-            min,
-            max
-        })
-    }
-
-    render() {
-        return (
-            <>
-                <div className="mb-20">
-                    <CalendarDivision updateDivision={this.handleDivisionChange} />
-                </div>
-                <div className="mb-20">
-                    <CalendarDefaults division={this.state.division} min={this.state.min} max={this.state.max} />
-                </div>
-                <div className="mb-20">
-                    <CalendarPicker division={this.state.division} min={this.state.min} max={this.state.max} />
-                </div>
-                <div>
-                    <FormButton type="button"
-                                disabled={true}
-                                onClick={() => this.props.pageHandler(5)}
-                                >Next</FormButton>
-                </div>
-            </>
-        )
-    }
+    return (
+        <>
+            <div className="mb-20">
+                <CalendarDivision updateDivision={handleDivisionChange} />
+            </div>
+            <div className="mb-20">
+                <CalendarDefaults division={division} min={min} max={max} />
+            </div>
+            <div className="mb-20">
+                <CalendarPicker division={division} min={min} max={max} />
+            </div>
+        </>
+    )
 }
-
-export default CalendarBuilder;

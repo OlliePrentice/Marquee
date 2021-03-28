@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {useDropzone} from 'react-dropzone';
+import { useEffect, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import FormButton from '../elements/form-button';
 import FormLabel from '../elements/form-label';
 
@@ -90,7 +90,9 @@ export default function AddDetails(props) {
                 <input
                     id="spaceName"
                     placeholder="Enter a name"
+                    name="name"
                     onChange={(e) => setName(e.target.value)}
+                    ref={props.register}
                 />
             </div>
             <div className="mb-12">
@@ -99,7 +101,9 @@ export default function AddDetails(props) {
                     id="spaceDesc"
                     className="h-60"
                     placeholder="Enter a name"
+                    name="description"
                     onChange={(e) => setDescription(e.target.value)}
+                    ref={props.register}
                 />
             </div>
             <div className="mb-12">

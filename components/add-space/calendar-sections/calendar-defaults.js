@@ -5,14 +5,13 @@ import usePrevious from "../../../utils/usePrevious";
 import TimeSelects from "../../elements/time-selects";
 import FormSectionHeading from "../../elements/form-section-heading";
 
-function CalendarDefaults({division, min, max}) {
+export default function CalendarDefaults({division, min, max}) {
 
     const prevProps = usePrevious({division, min, max});
     const [timepickers, setTimepickers] = useState([]);
 
     const firstDay = startOfWeek(new Date());
-    const weekDays = Array.from(Array(7)).map((e, i) => formatLocale(addDays(firstDay, (i + 1)), 'EEEE'));
-
+    const weekDays = Array.from(Array(7)).map((_e, i) => formatLocale(addDays(firstDay, (i + 1)), 'EEEE'));
 
     function handleDayCheck(e) {
         const checkedDay = e.target.value;
@@ -34,11 +33,11 @@ function CalendarDefaults({division, min, max}) {
     }
 
     useEffect(() => {
-        if (prevProps !== undefined) {
-            if (prevProps.division !== division || prevProps.min !== min || prevProps.max !== max) {
-                setTimepickers([]);
-            }
+
+        if (prevProps !== undefined && (prevProps.division !== division || prevProps.min !== min || prevProps.max !== max)) {
+            setTimepickers([]);
         }
+
     }, [division, min, max]);
 
     return (
@@ -81,6 +80,3 @@ function CalendarDefaults({division, min, max}) {
         </>
     );
 }
-
-
-export default CalendarDefaults;

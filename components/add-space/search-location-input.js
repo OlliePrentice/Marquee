@@ -55,7 +55,7 @@ async function handlePlaceSelect(updateQuery, _updateValidity) {
     }
 }
 
-function SearchLocationInput(props) {
+export default function SearchLocationInput(props) {
     const [query, setQuery] = useState("");
     const autoCompleteRef = useRef(null);
 
@@ -85,5 +85,3 @@ function SearchLocationInput(props) {
         </div>
     );
 }
-
-export default SearchLocationInput;

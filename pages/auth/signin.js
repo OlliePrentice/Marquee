@@ -42,7 +42,6 @@ export default function SignIn({providers, siteUrl}) {
         <>
             <Head>
                 <title>Create Next App</title>
-                <link rel="icon" href="/icons/favicon.ico"/>
             </Head>
             <Layout>
                 <div className="bg-gray-50">

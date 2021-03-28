@@ -1,6 +1,7 @@
 import AddSpaceForm from '../components/add-space/add-space-form';
-import { useSession } from 'next-auth/client'
-import { withRouter } from 'next/router'
+import Head from "next/head";
+import { useSession } from 'next-auth/client';
+import { withRouter } from 'next/router';
 import {getTopLevelCategories} from '../lib/mongodb';
 
 function AddSpace(props) {
@@ -17,6 +18,9 @@ function AddSpace(props) {
 
     return (
         <>
+            <Head>
+                <title>Create Next App</title>
+            </Head>
             <AddSpaceForm categories={props.categories} />
         </>
     )
